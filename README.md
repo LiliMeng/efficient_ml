@@ -71,9 +71,11 @@ The key-value cache in Transformer models is a powerful technique to enhance the
 
 ## Multi-Query Attention and Grouped-query Attention 
 
-[(Video)](https://www.youtube.com/watch?v=pVP0bu8QA2w)
+[(Video)](https://www.youtube.com/watch?v=pVP0bu8QA2w) 
 
    ### Multi-Query Attention in Transformers
+
+Original Paper: Fast Transformer Decoding: One Write-Head is All You Need [(link)](https://arxiv.org/pdf/1911.02150)
 
 Multi-query attention is a variant of the attention mechanism used in Transformer models to improve computational efficiency during the decoding phase. The primary goal of multi-query attention is to reduce the memory and computation overhead associated with the self-attention mechanism, especially in large models.
 
