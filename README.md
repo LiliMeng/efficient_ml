@@ -211,3 +211,73 @@ Grouped Query Attention in Transformer models is an optimization technique that 
 
 ## 3. Fast LLM Serving with vLLM and PagedAttention
 [(Video)](https://www.youtube.com/watch?v=5ZlavKF_98U)
+
+## 4. Longformer: An Efficient Transformer Variant
+
+Longformer is a Transformer model variant designed to handle long documents efficiently. Traditional Transformers have quadratic complexity with respect to the input sequence length, making them impractical for long sequences. Longformer addresses this limitation by introducing a sparse attention mechanism that scales linearly with sequence length.
+
+### Key Concepts of Longformer
+
+1. **Sparse Attention**:
+   - Unlike traditional Transformers that use dense self-attention (attending to all tokens), Longformer uses a combination of local and global attention patterns to reduce computational complexity.
+
+2. **Local Attention**:
+   - Each token attends to a fixed window of surrounding tokens. This localized attention captures nearby dependencies and scales linearly with sequence length.
+   - The size of the window can be adjusted based on the task.
+
+3. **Global Attention**:
+   - Select tokens, deemed important for the specific task, attend to all other tokens in the sequence.
+   - These tokens could be task-specific (e.g., CLS token for classification) or strategically chosen based on domain knowledge.
+
+4. **Dilated Sliding Window**:
+   - In addition to local attention, Longformer can use a dilated sliding window, allowing tokens to attend to others at regular intervals, increasing the receptive field without significantly increasing computational cost.
+
+### How Longformer Works
+
+1. **Attention Mechanism**:
+   - **Local Sliding Window Attention**: Each token attends to its neighbors within a fixed-size window. This is efficient and captures local context.
+   - **Global Attention**: Important tokens, specified beforehand or learned, attend to all other tokens. This allows the model to capture long-range dependencies without incurring a quadratic cost.
+
+2. **Combining Local and Global Attention**:
+   - The model combines local and global attention by computing both and then integrating them. This ensures that the model benefits from both fine-grained local context and broader, global context.
+
+3. **Implementation**:
+   - The implementation involves masking out the irrelevant positions in the attention matrix, ensuring that each token only attends to its designated tokens, either locally or globally.
+
+### Example Architecture
+
+1. **Input Representation**:
+   - Input tokens are first embedded into continuous representations, similar to other Transformers.
+
+2. **Attention Layers**:
+   - **Local Attention Layer**: For each token, compute attention scores for tokens within the local window.
+   - **Global Attention Layer**: For globally important tokens, compute attention scores for all tokens in the sequence.
+
+3. **Combining Layers**:
+   - The outputs from the local and global attention layers are combined, often by simple addition or concatenation, followed by a linear transformation.
+
+### Benefits of Longformer
+
+1. **Scalability**:
+   - Longformer can handle much longer sequences than traditional Transformers, making it suitable for tasks involving long documents, such as legal text analysis, scientific articles, and books.
+
+2. **Efficiency**:
+   - By reducing the complexity from quadratic to linear, Longformer significantly reduces computational and memory requirements, enabling training and inference on longer sequences.
+
+3. **Flexibility**:
+   - The ability to designate global tokens provides flexibility to tailor the attention mechanism to specific tasks, enhancing performance for various applications.
+
+### Applications
+
+1. **Document Classification**:
+   - Longformer can classify long documents by efficiently attending to relevant sections, maintaining context over long spans.
+
+2. **Question Answering**:
+   - For question answering tasks, Longformer can attend to both the question and relevant parts of a long context, improving answer accuracy.
+
+3. **Summarization**:
+   - In summarization tasks, Longformer can effectively capture and summarize long documents by focusing on key information throughout the text.
+
+### Conclusion
+
+Longformer is a powerful variant of the Transformer model designed to handle long sequences efficiently. By using a combination of local and global attention mechanisms, Longformer reduces computational complexity while maintaining the ability to capture both short-range and long-range dependencies. This makes it an ideal choice for tasks involving long-form content, providing a scalable and efficient solution for processing extensive textual data.
