@@ -17,9 +17,7 @@ Transformers use a mechanism called self-attention to weigh the importance of di
 
 The attention mechanism calculates the relevance of each token (key) to the current token (query) and uses this relevance to weigh the values. This is mathematically represented as:
 
-\[ \text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V \]
-
-where \(d_k\) is the dimension of the key vectors.
+<img width="344" alt="Screenshot 2024-07-15 at 11 26 54 AM" src="https://github.com/user-attachments/assets/195faf04-c9bb-47d5-b574-492adc898f86">
 
 #### Key-Value Cache in Decoding
 
@@ -86,10 +84,7 @@ In the standard Transformer architecture, multi-head attention is used to allow 
 1. **Multiple Heads**: Each head performs its own self-attention operation using separate sets of Query (Q), Key (K), and Value (V) matrices.
 2. **Parallel Attention**: The results from each head are concatenated and linearly transformed to produce the final output.
 
-The main formula for multi-head attention is:
-\[ \text{MultiHead}(Q, K, V) = \text{Concat}(\text{head}_1, \text{head}_2, \ldots, \text{head}_h)W^O \]
-where each head is calculated as:
-\[ \text{head}_i = \text{Attention}(QW_i^Q, KW_i^K, VW_i^V) \]
+<img width="506" alt="Screenshot 2024-07-15 at 11 14 56 AM" src="https://github.com/user-attachments/assets/375c7b45-7b0b-4c04-a077-7f252590b16a">
 
 This process requires computing and storing separate K and V matrices for each attention head, which can be resource-intensive.
 
@@ -101,13 +96,9 @@ Multi-query attention aims to reduce this resource usage by sharing the Key (K) 
 2. **Separate Queries**: Each head retains its own Q matrix, allowing for different attention patterns across heads.
 
 #### Formula for Multi-Query Attention
+<img width="551" alt="Screenshot 2024-07-15 at 11 26 38 AM" src="https://github.com/user-attachments/assets/bcf50b4e-5d86-4f16-9b8a-1dfa9f4224a1">
 
-The attention computation in multi-query attention can be described as:
-\[ \text{MultiQuery}(Q_i, K, V) = \text{Concat}(\text{head}_1, \text{head}_2, \ldots, \text{head}_h)W^O \]
-where each head is calculated as:
-\[ \text{head}_i = \text{Attention}(Q_i, K, V) \]
 
-Here, \( K \) and \( V \) are shared across all heads, but each head has its own \( Q_i \).
 
 #### Benefits of Multi-Query Attention
 
