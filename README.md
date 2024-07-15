@@ -73,6 +73,10 @@ The key-value cache in Transformer models is a powerful technique to enhance the
 
 [(Video)](https://www.youtube.com/watch?v=pVP0bu8QA2w) 
 
+High level overview:
+<img width="1408" alt="Screenshot 2024-07-15 at 3 39 25 PM" src="https://github.com/user-attachments/assets/15abd92b-578b-4af0-bdc5-db2d20a8c75f">
+
+
    ### 2.1 Multi-Query Attention in Transformers
 
 Original Paper: Fast Transformer Decoding: One Write-Head is All You Need [(link)](https://arxiv.org/pdf/1911.02150)
