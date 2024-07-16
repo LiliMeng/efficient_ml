@@ -213,6 +213,9 @@ Grouped Query Attention in Transformer models is an optimization technique that 
 [(Video)](https://www.youtube.com/watch?v=5ZlavKF_98U)
 
 ## 4. Longformer: An Efficient Transformer Variant
+Longformer: The Long-Document Transformer [Paper](https://arxiv.org/pdf/2004.05150v2)
+<img width="1318" alt="Screenshot 2024-07-15 at 4 57 21 PM" src="https://github.com/user-attachments/assets/5dfdb9ee-23f9-4f3b-a03b-97c113f1c27c">
+
 
 Longformer is a Transformer model variant designed to handle long documents efficiently. Traditional Transformers have quadratic complexity with respect to the input sequence length, making them impractical for long sequences. Longformer addresses this limitation by introducing a sparse attention mechanism that scales linearly with sequence length.
 
