@@ -179,7 +179,7 @@ Grouped Query Attention aims to reduce the computational and memory overhead by 
 
 ## 3. Fast LLM Serving with vLLM and PagedAttention
 [(Video)](https://www.youtube.com/watch?v=5ZlavKF_98U)
-Efficient Memory Management for Large Language Model Serving with PagedAttention [Paper](https://arxiv.org/pdf/2309.06180)
+Efficient Memory Management for Large Language Model Serving with PagedAttention [Paper](https://arxiv.org/pdf/2309.06180) [Blog](https://blog.vllm.ai/2023/06/20/vllm.html) [Github](https://github.com/vllm-project/vllm)
 
 PagedAttention is a technique aimed at improving the efficiency and scalability of attention mechanisms, particularly in large language models like transformers. The primary goal of PagedAttention is to handle large sequences of data efficiently by leveraging paged memory management principles, similar to those used in computer systems for handling large data sets.
 
