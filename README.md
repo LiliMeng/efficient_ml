@@ -130,10 +130,6 @@ Paper: GQA: Training Generalized Multi-Query Transformer Models from Multi-Head 
 
 Grouped Query Attention is an advanced technique used in Transformer models to strike a balance between the flexibility of multi-head attention and the computational efficiency of multi-query attention. The idea is to partition the query heads into groups, where each group shares a common set of key and value pairs.
 
-#### Background: Standard Multi-Head Attention
-
-In a standard multi-head attention mechanism, each head independently computes its own set of query (Q), key (K), and value (V) vectors. This allows the model to focus on different parts of the input sequence simultaneously, providing a richer representation of the data. However, it also means that each head requires separate computation and storage of Q, K, and V, which can be resource-intensive.
-
 #### Concept of Grouped Query Attention
 
 Grouped Query Attention aims to reduce the computational and memory overhead by grouping the query heads and sharing the key and value vectors within each group. Here's how it works:
@@ -161,21 +157,6 @@ Grouped Query Attention aims to reduce the computational and memory overhead by 
 4. **Concatenation and Output**:
    - Concatenate the outputs of all heads across all groups.
    - Apply a linear transformation to produce the final output.
-
-#### Example Workflow
-
-1. **Grouping and Initialization**:
-   - Divide `h` heads into `g` groups.
-   - Initialize separate Q vectors for each head, and shared K and V vectors for each group.
-
-2. **Attention Computation**:
-   - For each group:
-     - Compute K and V vectors.
-     - For each head in the group, compute the attention scores and weighted sum using the group's K and V.
-
-3. **Combine Results**:
-   - Concatenate the results from all heads.
-   - Apply a final linear layer to integrate the information.
 
 ### Benefits of Grouped Query Attention
 
