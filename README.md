@@ -200,6 +200,97 @@ Grouped Query Attention aims to reduce the computational and memory overhead by 
 [(Video)](https://www.youtube.com/watch?v=5ZlavKF_98U)
 Efficient Memory Management for Large Language Model Serving with PagedAttention [Paper](https://arxiv.org/pdf/2309.06180)
 
+PagedAttention is a technique aimed at improving the efficiency and scalability of attention mechanisms, particularly in large language models like transformers. The primary goal of PagedAttention is to handle large sequences of data efficiently by leveraging paged memory management principles, similar to those used in computer systems for handling large data sets.
+
+### Key Concepts and Principles
+
+1. **Memory Paging**:
+   - **Paging in Computing**: In computer systems, paging is a memory management scheme that eliminates the need for contiguous allocation of physical memory. It breaks memory into fixed-size blocks called pages, which can be loaded into any physical memory location.
+   - **Paging in Attention Mechanisms**: PagedAttention applies a similar concept to the attention mechanism by breaking down the attention computation into smaller, more manageable chunks (pages), which can be processed independently and efficiently.
+
+2. **Attention Mechanism**:
+   - **Standard Attention**: In standard attention mechanisms, particularly in transformers, the computational complexity is \(O(n^2)\) where \(n\) is the sequence length. This is due to the need to compute attention scores for all pairs of input tokens.
+   - **PagedAttention**: PagedAttention reduces this complexity by processing attention in smaller chunks, reducing the memory footprint and computational load at any given time.
+
+### How PagedAttention Works
+
+1. **Chunking the Input**:
+   - The input sequence is divided into smaller chunks or pages. Each chunk contains a subset of the total input tokens, making the attention computation more manageable.
+   
+2. **Local Attention within Chunks**:
+   - Attention is computed locally within each chunk. This means that tokens within a chunk attend to each other but not to tokens in other chunks initially. This reduces the computational complexity significantly.
+
+3. **Cross-Chunk Attention**:
+   - To maintain the global context, cross-chunk attention is performed. This can be done by allowing tokens at the boundaries of chunks to attend to tokens in adjacent chunks or by using a hierarchical attention mechanism where summaries of each chunk are used to perform global attention.
+
+4. **Hierarchical Processing**:
+   - PagedAttention can use hierarchical processing where each level of the hierarchy performs attention over progressively larger contexts, starting from local contexts (within chunks) to more global contexts (across chunks).
+
+### Benefits of PagedAttention
+
+1. **Scalability**:
+   - By breaking down the attention computation into smaller chunks, PagedAttention scales better with longer input sequences, addressing the quadratic complexity issue of standard attention mechanisms.
+
+2. **Efficiency**:
+   - Memory and computational resources are used more efficiently, as only a subset of the data is processed at any given time. This can lead to faster training and inference times.
+
+3. **Flexibility**:
+   - PagedAttention can be adapted to different sizes of chunks and different strategies for cross-chunk attention, providing flexibility in balancing local and global context.
+
+
+
+Here is a conceptual example of how PagedAttention might be implemented:
+
+```python
+import torch
+import torch.nn as nn
+
+class PagedAttention(nn.Module):
+    def __init__(self, embed_dim, num_heads, chunk_size):
+        super(PagedAttention, self).__init__()
+        self.embed_dim = embed_dim
+        self.num_heads = num_heads
+        self.chunk_size = chunk_size
+        self.attention = nn.MultiheadAttention(embed_dim, num_heads)
+
+    def forward(self, x):
+        # Divide the input sequence into chunks
+        chunks = x.split(self.chunk_size, dim=0)
+        
+        # Compute local attention within each chunk
+        local_attn_outputs = []
+        for chunk in chunks:
+            attn_output, _ = self.attention(chunk, chunk, chunk)
+            local_attn_outputs.append(attn_output)
+        
+        # Concatenate the local attention outputs
+        local_attn_outputs = torch.cat(local_attn_outputs, dim=0)
+        
+        # Compute cross-chunk attention (this is a simple form, more sophisticated methods can be used)
+        global_context = torch.mean(local_attn_outputs, dim=0, keepdim=True)
+        global_attn_output, _ = self.attention(local_attn_outputs, global_context, global_context)
+        
+        return global_attn_output
+
+# Example usage:
+embed_dim = 64
+num_heads = 8
+chunk_size = 16
+paged_attention = PagedAttention(embed_dim, num_heads, chunk_size)
+
+# Input sequence (batch_size, seq_length, embed_dim)
+x = torch.rand(32, 128, embed_dim)
+output = paged_attention(x)
+print(output.shape)
+```
+
+In this example:
+- The input sequence is divided into chunks of size `chunk_size`.
+- Local attention is computed within each chunk.
+- A simple form of cross-chunk attention is performed using the mean of local attention outputs as the global context.
+
+PagedAttention provides a scalable and efficient approach to handle long sequences, making it a valuable technique in modern deep learning applications.
+
 ## 4. Longformer: An Efficient Transformer Variant
 Longformer: The Long-Document Transformer [Paper](https://arxiv.org/pdf/2004.05150v2)
 <img width="1318" alt="Screenshot 2024-07-15 at 4 57 21 PM" src="https://github.com/user-attachments/assets/5dfdb9ee-23f9-4f3b-a03b-97c113f1c27c">
