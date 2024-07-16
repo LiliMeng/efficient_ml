@@ -198,6 +198,7 @@ Grouped Query Attention aims to reduce the computational and memory overhead by 
 
 ## 3. Fast LLM Serving with vLLM and PagedAttention
 [(Video)](https://www.youtube.com/watch?v=5ZlavKF_98U)
+Efficient Memory Management for Large Language Model Serving with PagedAttention [Paper](https://arxiv.org/pdf/2309.06180)
 
 ## 4. Longformer: An Efficient Transformer Variant
 Longformer: The Long-Document Transformer [Paper](https://arxiv.org/pdf/2004.05150v2)
@@ -227,3 +228,4 @@ Reducing Transformer Key-Value Cache Size with Cross-Layer Attention [Paper](htt
 ## 6. Efficient KV Cache Reuse with RadixAttention
 
 SGLang: Efficient Execution of Structured Language Model Programs [Paper](https://arxiv.org/pdf/2312.07104)
+
