@@ -65,10 +65,6 @@ Here’s a step-by-step workflow illustrating the key-value caching mechanism du
    - **Pros**: Simplifies the attention computation in each step by avoiding redundant calculations.
    - **Cons**: Adds complexity to the model implementation due to the need to manage the cache.
 
-### Conclusion
-
-The key-value cache in Transformer models is a powerful technique to enhance the efficiency of the attention mechanism during inference. By reusing previously computed keys and values, the model can significantly reduce the computational overhead and speed up the generation process. This technique is particularly useful in applications requiring real-time or low-latency processing, such as machine translation, text generation, and other NLP tasks.
-
 ## 2. Multi-Query Attention and Grouped-query Attention 
 
 [(Video)](https://www.youtube.com/watch?v=pVP0bu8QA2w) 
@@ -128,11 +124,6 @@ Multi-query attention aims to reduce this resource usage by sharing the Key (K) 
 
 2. **Implementation Complexity**:
    - While conceptually simpler in some respects, multi-query attention requires careful implementation to ensure that the shared K and V matrices are effectively utilized across all heads.
-
-### Conclusion
-
-Multi-query attention is a variant of the attention mechanism designed to improve efficiency in Transformer models. By sharing the Key and Value matrices across all attention heads while keeping separate Query matrices, it reduces memory usage and computational overhead. This makes it especially useful in scenarios where model efficiency is critical, such as during inference in large-scale models. Despite some tradeoffs in expressive power, multi-query attention offers a scalable and efficient alternative to standard multi-head attention.
-
 
 ### 2.2 Grouped Query Attention in Transformer Models
 Paper: GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints [(link)](https://arxiv.org/pdf/2305.13245)
@@ -204,10 +195,6 @@ Grouped Query Attention aims to reduce the computational and memory overhead by 
 
 2. **Implementation Complexity**:
    - Implementing grouped query attention requires careful management of the grouping logic and ensuring efficient computation across groups.
-
-### Conclusion
-
-Grouped Query Attention in Transformer models is an optimization technique that balances the flexibility of multi-head attention with the efficiency of multi-query attention. By grouping attention heads and sharing key and value vectors within each group, this approach reduces memory usage and computational overhead while still allowing for diverse attention patterns. This makes it a valuable technique for scaling Transformer models, especially in resource-constrained environments.
 
 ## 3. Fast LLM Serving with vLLM and PagedAttention
 [(Video)](https://www.youtube.com/watch?v=5ZlavKF_98U)
