@@ -231,26 +231,6 @@ Longformer is a Transformer model variant designed to handle long documents effi
 3. **Implementation**:
    - The implementation involves masking out the irrelevant positions in the attention matrix, ensuring that each token only attends to its designated tokens, either locally or globally.
 
-### Example Architecture
+## 5.  Cross Layer KV-sharing
 
-1. **Input Representation**:
-   - Input tokens are first embedded into continuous representations, similar to other Transformers.
-
-2. **Attention Layers**:
-   - **Local Attention Layer**: For each token, compute attention scores for tokens within the local window.
-   - **Global Attention Layer**: For globally important tokens, compute attention scores for all tokens in the sequence.
-
-3. **Combining Layers**:
-   - The outputs from the local and global attention layers are combined, often by simple addition or concatenation, followed by a linear transformation.
-
-### Benefits of Longformer
-
-1. **Scalability**:
-   - Longformer can handle much longer sequences than traditional Transformers, making it suitable for tasks involving long documents, such as legal text analysis, scientific articles, and books.
-
-2. **Efficiency**:
-   - By reducing the complexity from quadratic to linear, Longformer significantly reduces computational and memory requirements, enabling training and inference on longer sequences.
-
-3. **Flexibility**:
-   - The ability to designate global tokens provides flexibility to tailor the attention mechanism to specific tasks, enhancing performance for various applications.
-
+Reducing Transformer Key-Value Cache Size with Cross-Layer Attention [Paper](https://arxiv.org/pdf/2405.12981)
