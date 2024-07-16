@@ -221,3 +221,5 @@ Longformer is a Transformer model variant designed to handle long documents effi
 ## 5.  Cross Layer KV-sharing
 
 Reducing Transformer Key-Value Cache Size with Cross-Layer Attention [Paper](https://arxiv.org/pdf/2405.12981)
+<img width="1153" alt="Screenshot 2024-07-16 at 10 28 10 AM" src="https://github.com/user-attachments/assets/0baedcd0-21ee-4ff3-80ab-68e822d1f827">
+
