@@ -219,22 +219,6 @@ Longformer: The Long-Document Transformer [Paper](https://arxiv.org/pdf/2004.051
 
 Longformer is a Transformer model variant designed to handle long documents efficiently. Traditional Transformers have quadratic complexity with respect to the input sequence length, making them impractical for long sequences. Longformer addresses this limitation by introducing a sparse attention mechanism that scales linearly with sequence length.
 
-### Key Concepts of Longformer
-
-1. **Sparse Attention**:
-   - Unlike traditional Transformers that use dense self-attention (attending to all tokens), Longformer uses a combination of local and global attention patterns to reduce computational complexity.
-
-2. **Local Attention**:
-   - Each token attends to a fixed window of surrounding tokens. This localized attention captures nearby dependencies and scales linearly with sequence length.
-   - The size of the window can be adjusted based on the task.
-
-3. **Global Attention**:
-   - Select tokens, deemed important for the specific task, attend to all other tokens in the sequence.
-   - These tokens could be task-specific (e.g., CLS token for classification) or strategically chosen based on domain knowledge.
-
-4. **Dilated Sliding Window**:
-   - In addition to local attention, Longformer can use a dilated sliding window, allowing tokens to attend to others at regular intervals, increasing the receptive field without significantly increasing computational cost.
-
 ### How Longformer Works
 
 1. **Attention Mechanism**:
@@ -270,17 +254,3 @@ Longformer is a Transformer model variant designed to handle long documents effi
 3. **Flexibility**:
    - The ability to designate global tokens provides flexibility to tailor the attention mechanism to specific tasks, enhancing performance for various applications.
 
-### Applications
-
-1. **Document Classification**:
-   - Longformer can classify long documents by efficiently attending to relevant sections, maintaining context over long spans.
-
-2. **Question Answering**:
-   - For question answering tasks, Longformer can attend to both the question and relevant parts of a long context, improving answer accuracy.
-
-3. **Summarization**:
-   - In summarization tasks, Longformer can effectively capture and summarize long documents by focusing on key information throughout the text.
-
-### Conclusion
-
-Longformer is a powerful variant of the Transformer model designed to handle long sequences efficiently. By using a combination of local and global attention mechanisms, Longformer reduces computational complexity while maintaining the ability to capture both short-range and long-range dependencies. This makes it an ideal choice for tasks involving long-form content, providing a scalable and efficient solution for processing extensive textual data.
