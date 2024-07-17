@@ -64,6 +64,47 @@ Here’s a step-by-step workflow illustrating the key-value caching mechanism du
 2. **Complexity**:
    - **Pros**: Simplifies the attention computation in each step by avoiding redundant calculations.
    - **Cons**: Adds complexity to the model implementation due to the need to manage the cache.
+  
+## Why Not Store the Query?
+    
+1.**Redundancy**:
+
+The query is derived from the current token and the model's internal state. Recomputing it is straightforward and does not require extensive computational resources.
+The keys and values, once computed, remain constant and are required for calculating attention scores with every new query. The query, however, changes with each new token generated.
+
+2 **Flexibility**:
+
+Not caching the query allows the model to dynamically adapt to the current context and token being processed. This dynamic recomputation is integral to the model’s ability to generate coherent and contextually relevant text.
+
+### Example Code for KV Cache:
+
+```
+def generate_next_token(previous_tokens):
+    K_cache = []  # List to store keys
+    V_cache = []  # List to store values
+    
+    for token in previous_tokens:
+        K, V = compute_KV(token)
+        K_cache.append(K)
+        V_cache.append(V)
+    
+    while not end_of_generation:
+        current_token = get_current_token()
+        Q = compute_query(current_token)
+        
+        # Compute attention using stored K and V
+        attention_scores = softmax(Q @ torch.stack(K_cache).transpose(-2, -1))
+        attention_output = attention_scores @ torch.stack(V_cache)
+        
+        next_token = generate_from_attention_output(attention_output)
+        K, V = compute_KV(next_token)
+        K_cache.append(K)
+        V_cache.append(V)
+        current_token = next_token
+        
+    return generated_sequence
+```
+
 
 ## 2. Multi-Query Attention and Grouped-query Attention 
 
