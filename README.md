@@ -49,12 +49,6 @@ Here’s a step-by-step workflow illustrating the key-value caching mechanism du
 3. **Continue Decoding**:
    - Each new token is processed by computing its query (Q), while reusing the cached keys and values from all previous tokens.
 
-### Practical Considerations
-
-1. **Cache Initialization**: At the start of decoding, the cache is initialized and populated with the keys and values for the initial sequence.
-2. **Cache Update**: As new tokens are generated, the cache is updated with the keys and values for these tokens.
-3. **Memory Management**: Efficient management and updating of the cache are crucial to ensure that the model remains efficient and scalable.
-
 ### Tradeoffs
 
 1. **Memory Usage**:
